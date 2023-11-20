@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  node-api:
+    build:
+      context: ./node-api
+      dockerfile: Dockerfile
+    container_name: node-api
+    tty: true
+    restart: always
+    volumes:
+      - ./node-api:/home/node/app
+    ports:
+      - 3000:3000
