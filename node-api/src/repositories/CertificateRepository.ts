@@ -86,9 +86,9 @@ export class CertificateRepository {
         success: true
       };
     } catch (error) {
-      console.error("Erro durante a atualização do certificado:", error);
+      console.error("Erro durante a atualização da certidão:", error);
       return {
-        message: "Erro durante a atualização do certificado.",
+        message: "Erro durante a atualização da certidão.",
         success: false
       };
     }
