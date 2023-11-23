@@ -1,7 +1,4 @@
-# birth-certificate-manager
- A birth date manager with ACL. Containing API's and UI.
-
-# Start Application Local with Docker:
+# Iniciando aplicação com Docker:
     ```
         nvm use 18 && cd node-api && npm i && cd ..
 
@@ -10,17 +7,15 @@
         or 
 
         docker-compose -f ./docker/docker-compose.dev.yml --project-directory=./ up
-
-        npm run migration:generate && npm run migration:run 
     ```
 
-# Connect into PgAdmin:
+## Conectando no PGAdmin:
     ```
         docker ps
         docker inspect your_postgres_container_id_here
     ```
-    In "Networks" copy value of "IPAdress", open in "localhost:5050" your PGAdmin,
-    insert your credentials into login page! Click in "Add new server" and insert
-    the credentials of your postgres , in host paste the value of "IPAdress"!
 
-    Click in "save" button, you are connect in your database!
+    ### Pas
+    Em "NetWorks" copie o valor de "IPAddress", abra em "localhost:5050" seu PGAdmin e insira suas credenciais de login definidas no seu "docker.compose".Após isto clique em “Add server” e insira as credenciais do seu postgres, no host cole o valor de "IPAddress"!
+
+    Clique no botão "salvar" e você estará conectado ao seu banco de dados!
