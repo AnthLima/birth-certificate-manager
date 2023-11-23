@@ -7,7 +7,8 @@
       "dev": "ts-node-dev --files src/server.ts",
       "lint": "eslint . --ext .ts",
       "start": "ts-node src/index.ts",
-      "typeorm": "typeorm-ts-node-commonjs"
+      "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
+		"migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run"
    },
    "keywords": [],
    "author": "Anthony Lima",
