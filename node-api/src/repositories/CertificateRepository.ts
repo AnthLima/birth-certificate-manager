@@ -108,7 +108,14 @@ export class CertificateRepository {
             };
         }
 
-        const certificates = await certificateRepository.find({ where: { idOfUser: userId } });
+        let certificates;
+
+        if (user.typeOfUser !== 'client') {
+            certificates = await certificateRepository.find();
+        } else {
+            certificates = await certificateRepository.find({ where: { idOfUser: userId } });
+        }
+
         if(certificates.length === 0){
             return {
                 message: "Não há certificados na base com este usuário.",

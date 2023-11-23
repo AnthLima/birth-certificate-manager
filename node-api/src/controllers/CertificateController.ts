@@ -39,6 +39,7 @@ const certificateUpdateSchema = z.object({
     typeOfCertificate: z.string().nonempty({ message: "O tipo de certificado é obrigatório." }),
     idOfUser: z.string().nonempty({ message: "Os dados estão incompletos para criação" }),
     idOfCertificate: z.string().nonempty({ message: "Os dados estão incompletos para criação" }),
+    status: z.string().nonempty({ message: "Status é obrigatório." }),
   });
 
 class CertificateController {
@@ -163,6 +164,7 @@ class CertificateController {
         const { id } = req.params;
 
         const certificateRepository = new CertificateRepository();
+
         const result = await certificateRepository.getCertificatesByUserId(id.toString());
 
         if (!result.success) {
@@ -181,7 +183,7 @@ class CertificateController {
             success: false,
         });
     }
-}
+  }
 
 }
 
