@@ -15,6 +15,7 @@
         docker inspect your_postgres_container_id_here
     ```
 
+### Passo a passo:
     Em "NetWorks" copie o valor de "IPAddress", abra em "localhost:5050" seu PGAdmin e insira suas credenciais de login definidas no seu "docker.compose".Após isto clique em “Add server” e insira as credenciais do seu postgres, no host cole o valor de "IPAddress"!
 
     Clique no botão "salvar" e você estará conectado ao seu banco de dados!
