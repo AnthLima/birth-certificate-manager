@@ -12,5 +12,10 @@ routes.post("/login", UserController.login);
 routes.post("/createCertificate", 
     upload.single('file'), 
     CertificateController.receiveDataAndCreateCertificate
+);
+
+routes.patch("/updateCertificate", 
+    upload.single('file'), 
+    CertificateController.updateDataOfCertificate
 )
 export default routes;
