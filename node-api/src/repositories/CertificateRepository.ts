@@ -134,7 +134,56 @@ export class CertificateRepository {
             success: false,
         };
     }
+  }
+
+  public async deleteCertificateById(userId: string, idOfCertificate: string): Promise<{ message: string; success: boolean; deletedCertificate?: any }> {
+    const certificateRepository = AppDataSource.getRepository(Certificate);
+    const userRepository = AppDataSource.getRepository(User);
+
+    try {
+        const user = await userRepository.findOne({ where: { id: parseInt(userId) } });
+
+        if (!user) {
+            return {
+                message: "Usuário não encontrado.",
+                success: false,
+            };
+        }
+
+        const existingCertificate = await certificateRepository.findOne({ 
+            where: { id: parseInt(idOfCertificate) } 
+        });
+
+        if (!existingCertificate) {
+            return {
+                message: "Certidão não encontrada.",
+                success: false,
+            };
+        }
+
+        if ((user.typeOfUser === 'client' || user.typeOfUser === 'operator') && existingCertificate.status === 'Emitida') {
+            return {
+                message: "Não é possível excluir certificados já emitidos.",
+                success: false,
+            };
+        }
+
+        await certificateRepository.delete({ id: parseInt(idOfCertificate) });
+
+        return {
+            message: "Certificado excluído com sucesso!",
+            success: true,
+            deletedCertificate: {...existingCertificate}
+        };
+    } catch (error) {
+        console.error("Erro durante a exclusão do certificado:", error);
+        return {
+            message: "Erro durante a exclusão do certificado.",
+            success: false,
+        };
+    }
 }
+
 
 }
 

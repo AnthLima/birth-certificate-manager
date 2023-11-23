@@ -23,4 +23,9 @@ routes.get("/certificates/user/:id",
     CertificateController.getAllCertificatesOfSpecificUser
 );
 
+routes.delete(
+    "/deleteCertificate/:id/:idOfCertificate",
+    CertificateController.deleteCertificate
+);
+
 export default routes;

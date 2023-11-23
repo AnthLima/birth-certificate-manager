@@ -172,19 +172,40 @@ class CertificateController {
         }
 
         return res.status(200).json({
-            message: 'Certificados encontrados com sucesso!',
+            message: 'Certidões encontradas com sucesso!',
             success: true,
             certificates: result.certificates,
         });
     } catch (error) {
-        console.error("Erro durante a busca dos certificados:", error);
+        console.error("Erro durante a busca das certidões:", error);
         return res.status(500).json({
-            message: 'Erro interno do servidor durante a busca dos certificados',
+            message: 'Erro interno do servidor durante a busca das certidões',
             success: false,
         });
     }
   }
 
+  public async deleteCertificate(req: Request, res: Response) {
+    try {
+        const { id, idOfCertificate } = req.params;
+
+        const certificateRepository = new CertificateRepository();
+
+        const result = await certificateRepository.deleteCertificateById(id.toString(), idOfCertificate.toString());
+
+        if (!result.success) {
+            return res.status(400).json(result);
+        }
+
+        return res.status(200).json(result);
+    } catch (error) {
+        console.error("Erro durante a deleção das certidões:", error);
+        return res.status(500).json({
+            message: 'Erro interno do servidor durante a deleção das certidões',
+            success: false,
+        });
+    }
+  }
 }
 
 export default new CertificateController();
