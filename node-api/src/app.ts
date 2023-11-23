@@ -1,10 +1,12 @@
 import express from "express";
 import routes from "./routes";
+import { AppDataSource } from "./data-source";
 
 class App {
   public express: express.Application;
 
   public constructor() {
+    this.initializeApplicationAndDB();
     this.express = express();
     this.middlewares();
     this.routes();
@@ -16,6 +18,14 @@ class App {
 
   private routes(): void {
     this.express.use(routes);
+  }
+
+  private initializeApplicationAndDB(): void {
+    AppDataSource.initialize().then(() => {
+      console.log("Banco inicializado com sucesso");
+    }).catch((error) => {
+      console.log("Houve problemas com o banco", error);
+    })
   }
 }
 
