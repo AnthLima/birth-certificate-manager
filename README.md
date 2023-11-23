@@ -1,7 +1,7 @@
 # birth-certificate-manager
  A birth date manager with ACL. Containing API's and UI.
 
-# Start Application Local:
+# Start Application Local with Docker:
     ```
         nvm use 18 && cd node-api && npm i && cd ..
 
@@ -10,6 +10,8 @@
         or 
 
         docker-compose -f ./docker/docker-compose.dev.yml --project-directory=./ up
+
+        npm run migration:generate && npm run migration:run 
     ```
 
 # Connect into PgAdmin:
