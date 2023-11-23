@@ -14,6 +14,16 @@ services:
       - 3000:3000
     depends_on:
       - db
+  
+  react-ui:
+    build:
+      context: ./react-ui
+      dockerfile: Dockerfile
+    container_name: react-ui
+    volumes:
+      - ./react-ui:/home/node/app
+    ports:
+      - '8080:8080'
 
   db:
     image: postgres:14.2-alpine
