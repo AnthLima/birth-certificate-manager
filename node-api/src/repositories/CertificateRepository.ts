@@ -93,7 +93,42 @@ export class CertificateRepository {
       };
     }
   }
-  
+
+  public async getCertificatesByUserId(userId: string): Promise<{ message: string; success: boolean; certificates?: Certificate[] }> {
+    const certificateRepository = AppDataSource.getRepository(Certificate);
+    const userRepository = AppDataSource.getRepository(User);
+
+    try {
+        const user = await userRepository.findOne({where: {id: parseInt(userId)}});
+
+        if (!user) {
+            return {
+                message: "Usuário não encontrado.",
+                success: false,
+            };
+        }
+
+        const certificates = await certificateRepository.find({ where: { idOfUser: userId } });
+        if(certificates.length === 0){
+            return {
+                message: "Não há certificados na base com este usuário.",
+                success: false,
+            };
+        }
+        return {
+            message: "Certificados encontrados com sucesso!",
+            success: true,
+            certificates,
+        };
+    } catch (error) {
+        console.error("Erro durante a busca dos certificados:", error);
+        return {
+            message: "Erro durante a busca dos certificados.",
+            success: false,
+        };
+    }
+}
+
 }
 
 export default CertificateRepository;

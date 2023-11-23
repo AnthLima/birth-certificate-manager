@@ -158,6 +158,31 @@ class CertificateController {
     }
   }
 
+  public async getAllCertificatesOfSpecificUser(req: Request, res: Response) {
+    try {
+        const { id } = req.params;
+
+        const certificateRepository = new CertificateRepository();
+        const result = await certificateRepository.getCertificatesByUserId(id.toString());
+
+        if (!result.success) {
+            return res.status(400).json(result);
+        }
+
+        return res.status(200).json({
+            message: 'Certificados encontrados com sucesso!',
+            success: true,
+            certificates: result.certificates,
+        });
+    } catch (error) {
+        console.error("Erro durante a busca dos certificados:", error);
+        return res.status(500).json({
+            message: 'Erro interno do servidor durante a busca dos certificados',
+            success: false,
+        });
+    }
+}
+
 }
 
 export default new CertificateController();

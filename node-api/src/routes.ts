@@ -18,4 +18,9 @@ routes.patch("/updateCertificate",
     upload.single('file'), 
     CertificateController.updateDataOfCertificate
 )
+
+routes.get("/certificates/user/:id", 
+    CertificateController.getAllCertificatesOfSpecificUser
+);
+
 export default routes;
